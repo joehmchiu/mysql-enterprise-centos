@@ -1,0 +1,22 @@
+---
+- name: copy and execute the fd script
+  ignore_errors: yes
+  delegate_to: "{{sshname}}"
+  become: yes
+  script: "{{fd_sh}}"
+
+- name: Reboot the server for kernel update
+  delegate_to: "{{sshname}}"
+  become: yes
+  shell: "sleep 3 && /sbin/reboot" 
+  async: 1
+  poll: 0 
+
+- name: wait for host sshd
+  local_action: wait_for host={{ inventory_hostname }} search_regex=OpenSSH port=22 timeout=300 delay=30
+
+- name: resize vm
+  delegate_to: "{{sshname}}"
+  become: yes
+  command: xfs_growfs -d /dev/sda2
+

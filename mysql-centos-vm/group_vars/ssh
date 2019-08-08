@@ -1,0 +1,9 @@
+---
+# ssh config settings
+admin_user: azureuser
+sshkey: "<path to the created key>"
+sshname: "<MySQL SSH Name>"
+authkeys: "<path to the key access>"
+config: "/root/.ssh/config"
+key_data: "<key data>"
+marker: "Auto {{vm_name}} Server by Ansible"

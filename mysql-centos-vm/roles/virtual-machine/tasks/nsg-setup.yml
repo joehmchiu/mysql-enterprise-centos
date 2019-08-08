@@ -1,0 +1,19 @@
+---
+# setup nsg
+
+- name: Create Network Security Group that allows SSH and the Mysql server
+  azure_rm_securitygroup:
+    resource_group: "{{resource_group_name}}"
+    name: "{{nsg_name}}"
+    rules:
+      - name: "{{item.name}}"
+        protocol: Tcp
+        source_address_prefix: "{{item.srcaddr}}"
+        destination_port_range: "{{item.port}}"
+        access: Allow
+        priority: "{{item.pid}}"
+        direction: Inbound
+        description: "{{item.desc}}"
+  with_items:
+        - "{{nsg}}"
+

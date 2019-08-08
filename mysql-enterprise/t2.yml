@@ -1,0 +1,9 @@
+---
+- name: Just a test
+  hosts: test
+  become: yes
+  tasks:
+  - name: test
+    shell: |
+      cat "hello world" >> /tmp/foobar.log
+

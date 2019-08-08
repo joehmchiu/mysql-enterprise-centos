@@ -1,0 +1,13 @@
+---
+# manage drives
+- name: Create managed disk
+  azure_rm_managed_disk:
+    name: "{{item.name}}disk"
+    location: "{{vm_location}}"
+    resource_group: "{{resource_group_name}}"
+    disk_size_gb: "{{item.size}}"
+    managed_by: "{{vm_name}}"
+    storage_account_type: "{{storage_account_type}}"
+  with_items:
+    - "{{disk_mounts}}"
+

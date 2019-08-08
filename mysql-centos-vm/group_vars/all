@@ -1,0 +1,41 @@
+---
+# vars file for ansible-mysql server
+vm_location: australiaeast
+# JOEC
+vm: <vm name>
+resource_group_name: <resource group>
+vnet_name: "<reference to subnet>"
+subnet_name: "<subnet name>"
+nsg_name: "<network security group>"
+vm_name: "{{vm}}01"
+my_nic: "{{vm}}-nic"
+public_ip_name: "{{vm}}-ip"
+private_ip: "<static ip>"
+vm_size: <vm plan: Standard_D4s_v3>
+storage_account_type: <storage type: Premium_LRS>
+# format type
+ft: xfs
+# storage prefix
+sp: <will be prefixed to each of the storage>
+disk_mounts:
+  - { name: "{{sp}}01", dev: "sdc", size: 100, mode: '0777', dir: "/tmp" }
+  - { name: "{{sp}}02", dev: "sdd", size: 300, mode: '0755', dir: "/db"  }
+  - { name: "{{sp}}03", dev: "sde", size: 100, mode: '0755', dir: "/var/log" }
+
+nsg:
+  - { name: "AllowSSH01",   srcaddr: "<host ip range for access>", port: "22",   pid: "1000", desc: "Allow SSH connections through openvpn01" }
+  - { name: "AllowMySQL01", srcaddr: "<host ip range for access>", port: "3306", pid: "1200", desc: "Allow MySQL connections through openvpn01" }
+
+fd_sh: "{{playbook_dir}}/bin/fd.sh"
+
+# ssh config settings
+admin_user: azureuser
+sshkey: "<path to the created key>"
+sshname: "<MySQL SSH Name>"
+authkeys: "<path to the key access>"
+config: "/root/.ssh/config"
+key_data: "<key data>"
+marker: "Auto {{vm_name}} Server by Ansible"
+
+# mysql 
+port: 3306

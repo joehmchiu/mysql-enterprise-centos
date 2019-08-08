@@ -1,0 +1,76 @@
+- name: Stop var log daemons
+  delegate_to: "{{sshname}}"
+  become: yes
+  shell: |
+    service {{item}} stop
+  with_items:
+    - auditd
+    - rsyslog
+    - tuned
+
+# mouting the drives
+- name: Format the file system on each of the disk
+  ignore_errors: yes
+  delegate_to: "{{sshname}}"
+  become: yes
+  filesystem:
+    fstype: "{{ft}}"
+    dev: "/dev/{{item.dev}}"
+    force: yes
+  with_items:
+    - "{{disk_mounts}}"
+
+- name: Create mount directory
+  ignore_errors: yes
+  delegate_to: "{{sshname}}"
+  become: yes
+  file:
+    dest: "{{item.dir}}"
+    state: directory
+    force: yes
+    mode: "{{item.mode}}"
+  with_items:
+    - "{{disk_mounts}}"
+
+- name: "Get UUID for partition"
+  ignore_errors: yes
+  delegate_to: "{{sshname}}"
+  become: yes
+  command: blkid -s UUID -o value "/dev/{{item.dev}}"
+  register: disk_blkid
+  with_items: '{{ disk_mounts }}'
+  changed_when: False
+
+- name: display UUID
+  delegate_to: "{{sshname}}"
+  become: yes
+  debug: 
+    msg: "{{item.0.dir}} => {{item.1.stdout}}"
+  with_together:
+    - "{{disk_mounts}}"
+    - "{{disk_blkid.results}}"
+
+- name: Mount drive
+  ignore_errors: no
+  delegate_to: "{{sshname}}"
+  become: yes
+  mount:
+    path: "{{item.0.dir}}"
+    src: "UUID={{item.1.stdout}}"
+    fstype: "{{ft}}"
+    opts: defaults
+    state: present
+  with_together:
+    - "{{disk_mounts}}"
+    - "{{disk_blkid.results}}"
+
+- name: Chmod mounted directory
+  ignore_errors: yes
+  delegate_to: "{{sshname}}"
+  become: yes
+  shell: |
+    chmod {{item.mode}} {{item.dir}}
+  with_items:
+    - "{{disk_mounts}}"
+
+

@@ -1,0 +1,32 @@
+---
+
+- name: Message - Install mysql rpm packages
+  shell: |
+    {{app}} {{role_path|basename}} "removing package - /tmp/{{item}}" {{log_file}}
+  with_items:
+    - "{{rpm_packages}}"
+
+- name: Remove temp files in /tmp
+  shell: |
+    rm -rf /tmp/{{item}}
+  args:
+    warn: no
+  with_items:
+    - "{{rpm_packages}}"
+
+- name: Install Open LDAP packages message
+  shell: |
+    {{app}} {{role_path|basename}} "installing {{item}}" {{log_file}}
+  with_items:
+    - "{{ldap_packages}}"
+
+- name: Install Open LDAP packages
+  yum: name={{item}} state=installed
+  with_items:
+   - "{{ldap_packages}}"
+
+- name: db process finished
+  shell: |
+    {{app}} {{role_path|basename}} "{{role_path|basename}} - FIN" {{log_file}}
+
+

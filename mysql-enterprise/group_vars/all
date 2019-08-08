@@ -1,0 +1,65 @@
+---
+# create users and password pair for system user accounts
+# to generate the encrypted password: mkpasswd --method=sha-512 password
+user_accounts:
+    - { user: username,    pass: $6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN. }
+
+rpm_packages: 
+    - "mysql-commercial-common-8.0.12-1.1.el7.x86_64.rpm"
+    - "mysql-commercial-client-8.0.12-1.1.el7.x86_64.rpm" 
+    - "mysql-commercial-server-8.0.12-1.1.el7.x86_64.rpm"
+    - "mysql-commercial-libs-8.0.12-1.1.el7.x86_64.rpm"
+    - "mysql-commercial-libs-compat-8.0.12-1.1.el7.x86_64.rpm"
+    - "mysql-commercial-backup-8.0.12-1.1.el7.x86_64.rpm"
+
+packages: 
+    - ntp
+    - expect
+
+ldap_packages:
+    - realmd
+    - oddjob
+    - 'oddjob-mkhomedir'
+    - sssd
+    - adcli
+    - 'samba-common-tools'
+    - 'sssd-client'
+    - mlocate
+    - openldap
+    - 'openldap-clients'
+    - 'cyrus-sasl-scram'
+
+# undo
+undo_files: 
+    - /var/run/mysqld
+    - /etc/my.cnf*
+    - /var/log/mysql*.log
+    - /tmp/my.cnf*
+    - /etc/ntp.conf
+    - /root/.my.cnf*
+    - /var/lib/mysql
+    - /db/mysql*
+
+undo_packages:
+    - "mysql-commercial-backup.x86_64"
+    - "mysql-commercial-client.x86_64"
+    - "mysql-commercial-common.x86_64"
+    - "mysql-commercial-libs.x86_64"
+    - "mysql-commercial-libs-compat.x86_64"
+    - "mysql-commercial-server.x86_64"
+
+local_packages:
+    - https://repo.mysql.com/mysql80-community-release-el7-1.noarch.rpm
+
+disable_repo:
+    - mysql55-community
+    - mysql56-community
+    - mysql57-community
+
+dump_file: all.sql.gz
+
+# database dumped files
+db_files: [ test ]
+
+# keep installation info to the log file
+log_file: /tmp/playbook-mysql8.log

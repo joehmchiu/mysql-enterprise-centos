@@ -1,0 +1,10 @@
+---
+# Undo all the Tasks in one go
+
+- name: Uninstall the previous MySQL installations
+  hosts: undo
+  become: yes
+  roles:
+    - undo
+  tags: undo
+

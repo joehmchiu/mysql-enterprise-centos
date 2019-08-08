@@ -1,0 +1,12 @@
+---
+# This playbook deploys the required stacks in this site.
+
+- name: apply common configuration to all nodes
+  hosts: common
+  become: yes
+  roles: 
+    - common
+  tags: 
+    - common
+    - setup
+

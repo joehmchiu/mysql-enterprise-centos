@@ -1,0 +1,12 @@
+---
+# This playbook deploys the required stacks in this site.
+
+- name: deploy MySQL and configure the databases
+  hosts: db
+  become: yes
+  roles: 
+    - db
+  tags: 
+    - db
+    - setup
+
