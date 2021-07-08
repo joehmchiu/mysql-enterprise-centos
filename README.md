@@ -10,8 +10,8 @@ There are two playbooks in this repository for the automation infrastructure as 
   - mount the created disks for mysql database
 3. mysql-enterprise: 
   - install MySQL Enterprise 8.x database
-  - create a root user
-  - setup the MySQL configurations by template
+  - create root and user accounts
+  - setup the MySQL configurations by Jinja2 template
   - initiralize and preload for the installation
   - requested packages installation 
   - run unit tests and finalize the installation
