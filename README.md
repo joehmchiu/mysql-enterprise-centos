@@ -2,13 +2,13 @@
 
 ## mysql-enterprise-centos
 There are two playbooks in this repository for the automation infrastructure as code. 
-1. mysql-centos-vm: 
+### mysql-centos-vm: 
   - create a Linux Centos VM in the customized vnet and subnet
   - create two extra storage disks for database data and logs
   - create ssh connection
   - configure firewalls
   - mount the created disks for mysql database
-3. mysql-enterprise: 
+### mysql-enterprise: 
   - install MySQL Enterprise 8.x database
   - create root and user accounts
   - setup the MySQL configurations by Jinja2 template
