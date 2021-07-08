@@ -38,3 +38,6 @@ There are two playbooks in this repository for the automation infrastructure as 
 - Permission configurations
 - Unit test
 - Security configuration
+
+## RUN
+sudo sh run.sh
