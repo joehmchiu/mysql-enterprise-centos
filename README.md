@@ -2,8 +2,20 @@
 
 ## mysql-enterprise-centos
 There are two playbooks in this repository for the automation infrastructure as code. 
-1. mysql-centos-vm: create a Linux Centos VM in the subnet and mount three disks for mysql database.
-2. mysql-enterprise: build a MySQL Enterprise 8.x database, create a root user, setup the configuration, build the firewalls, install the requested packages, run unit tests and finalize the installation.
+1. mysql-centos-vm: 
+  - create a Linux Centos VM in the customized vnet and subnet
+  - create two extra storage disks for database data and logs
+  - create ssh connection
+  - configure firewalls
+  - mount the created disks for mysql database
+3. mysql-enterprise: 
+  - install MySQL Enterprise 8.x database
+  - create a root user
+  - setup the MySQL configurations by template
+  - initiralize and preload for the installation
+  - requested packages installation 
+  - run unit tests and finalize the installation
+  - report the installation process
 
 ## Cloud and System
 - Azure Cloud
