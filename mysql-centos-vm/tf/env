@@ -1,5 +1,0 @@
-export ARM_SUBSCRIPTION_ID='xxxxxxxx-999a-4dc0-9397-f47f358d9b35'
-export ARM_CLIENT_ID='xxxxxxxx-fbd6-4e54-9ffd-b304e6cc12b7'
-export ARM_CLIENT_SECRET='xxxxxxxx|0o!(T({6rY*4jC'
-export ARM_TENANT_ID='xxxxxxxx-e8ab-44ed-a16d-b579fe2d7cd8'
-
