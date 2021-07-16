@@ -4,7 +4,7 @@ variable "resourcename" {
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-    # you can run sh env to exprt the variables to enviroment instead
+    # you can run sh env to export the variables to enviroment instead
     subscription_id = "xxxxxxxx-999a-4dc0-9397-f47f358d9b35"
     client_id       = "xxxxxxxx-fbd6-4e54-9ffd-b304e6cc12b7"
     client_secret   = var.skey
