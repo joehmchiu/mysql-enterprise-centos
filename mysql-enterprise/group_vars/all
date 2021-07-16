@@ -4,6 +4,7 @@
 user_accounts:
     - { user: username,    pass: $6$/LSSI/mKt$AuhndmeQEPpHrd3dY/sjgLhd0bjAbNQj2FerGMBx97Gxsqi4kGQCqH7AEaDxl9aLOQ6Kxdzi7g621i7fQ.GiN. }
 
+# download the MySQL Enterprise Edition: https://www.mysql.com/downloads/
 rpm_packages: 
     - "mysql-commercial-common-8.0.12-1.1.el7.x86_64.rpm"
     - "mysql-commercial-client-8.0.12-1.1.el7.x86_64.rpm" 
