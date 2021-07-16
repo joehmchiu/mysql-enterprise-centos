@@ -14,7 +14,7 @@ provider "azurerm" {
 # Create a resource group if it doesn’t exist
 resource "azurerm_resource_group" "rg" {
     name     = var.rg
-    location = "eastus"
+    location = var.location
 
     tags {
         environment = var.tag
@@ -25,7 +25,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_virtual_network" "vnet" {
     name                = "vnet"
     address_space       = [var.vnet_cidr]
-    location            = "eastus"
+    location            = var.location
     resource_group_name = "${azurerm_resource_group.myterraformgroup.name}"
 
     tags {
