@@ -42,7 +42,7 @@ resource "azurerm_subnet" "subnet" {
 }
 
 # Create public IPs
-resource "azurerm_public_ip" "publicIP" {
+resource "azurerm_public_ip" "IP" {
     name                         = "pub_ip"
     location                     = var.location
     resource_group_name          = "${azurerm_resource_group.myterraformgroup.name}"
@@ -173,5 +173,20 @@ resource "azurerm_virtual_machine" "vm" {
     tags {
         environment = var.tag
     }
+}
+
+locals {
+  tempfile = templatefile("${path.module}/scripts/ssh-config.tpl", {
+    ip = "${azurerm_public_ip.IP.pub_ip}"
+  })
+}
+
+resource "local_file" "ssh" {
+  content = local.tempfile
+  filename = "${path.module}/scripts/ssh-config.yml"
+
+  provisioner "local-exec" {
+    command = "ansible-playbook ${path.module}/scripts/ssh-config.yml"
+  }
 }
 
