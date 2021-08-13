@@ -2,15 +2,15 @@ variable "rg" {
   default = "present-rg"
 }
 
-variable "location" 
+variable "location" {
   default = "australiaeast"
 }
 
-variable "vnet_cidr" 
+variable "vnet_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "subnet_cidr" 
+variable "subnet_cidr" { 
   default = "10.0.0.0/24"
 }
 
@@ -22,7 +22,7 @@ variable "sshdata" {
   description = "SSH key RSA data."
 }
 
-variable "tag" 
+variable "tag" {
   default = "UAT Infrastructure"
 }
 
